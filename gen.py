@@ -116,7 +116,7 @@ def generate_global_mesh(width, height, rng):
 
 import hashlib
 
-def generate_blog_cover(seed=None, filename="cover.svg", unique_id=None):
+def generate_blog_cover(seed=None, filename="blog.svg", unique_id=None):
     if seed is None: seed = int(time.time())
     
     # Generate a short, stable unique ID if one wasn't properly provided or if it's long
