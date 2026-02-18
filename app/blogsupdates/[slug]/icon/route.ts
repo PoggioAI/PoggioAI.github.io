@@ -21,7 +21,7 @@ export async function GET(
         return new NextResponse('Invalid path', { status: 400 });
     }
 
-    const filePath = path.join(
+    let filePath = path.join(
         process.cwd(),
         'content/blogs',
         slug,
@@ -29,7 +29,17 @@ export async function GET(
     );
 
     if (!fs.existsSync(filePath)) {
-        return new NextResponse('File not found', { status: 404 });
+        // Fallback to cover.svg
+        filePath = path.join(
+            process.cwd(),
+            'content/blogs',
+            slug,
+            'cover.svg'
+        );
+
+        if (!fs.existsSync(filePath)) {
+            return new NextResponse('File not found', { status: 404 });
+        }
     }
 
     const fileBuffer = fs.readFileSync(filePath);
