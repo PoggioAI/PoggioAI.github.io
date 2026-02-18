@@ -2,7 +2,7 @@
 Date: Feb 18, 2026
 By Pierfrancesco Beneventano
 
-Based on **[Edge of Stochastic Stability (Andreyev and Beneventano, arXiv:2412.20553)](https://arxiv.org/abs/2412.20553); correspondence to [Pierfrancesco Beneventano](https://pierbeneventano.github.io//), [pierb@mit.edu](mailto:pierb@mit.edu).
+Based on **[Edge of Stochastic Stability (Andreyev and Beneventano, arXiv:2412.20553)](https://arxiv.org/abs/2412.20553)**; correspondence to [Pierfrancesco Beneventano](https://pierbeneventano.github.io/), [pierb@mit.edu](mailto:pierb@mit.edu).
 
 I remember in high school manually checking the stationary points to locate minima and maxima. Later in undergrad I was told a comforting mantra: go down (follow $-\nabla L$) and you end up at a stationary point.
 
