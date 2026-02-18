@@ -1,42 +1,29 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" preserveAspectRatio="xMidYMid slice" role="img" aria-labelledby="title desc">
   <title id="title">Edge of (Stochastic) Stability made simple</title>
-  <desc id="desc">Minimal geometric cover with gradient and title.</desc>
+  <desc id="desc">Animated cover using the GIF from the post.</desc>
   <defs>
-    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#f5f7ff"/>
-      <stop offset="100%" stop-color="#eef2f7"/>
+    <linearGradient id="fade" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0f172a" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="#0f172a" stop-opacity="0.6"/>
     </linearGradient>
-    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0%" stop-color="#1f2937"/>
-      <stop offset="100%" stop-color="#6b7280"/>
+    <linearGradient id="frame" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.9"/>
+      <stop offset="100%" stop-color="#e2e8f0" stop-opacity="0.9"/>
     </linearGradient>
   </defs>
-  <rect width="1200" height="630" fill="url(#bg)"/>
-  <g opacity="0.2">
-    <circle cx="980" cy="120" r="180" fill="#cbd5f5"/>
-    <circle cx="220" cy="520" r="240" fill="#dbeafe"/>
+
+  <rect width="1200" height="630" fill="#0f172a"/>
+  <image href="/blog-assets/edge-of-stochastic-stability-part-I/assets/gif_GD.gif" x="0" y="0" width="1200" height="630" preserveAspectRatio="xMidYMid slice"/>
+  <rect width="1200" height="630" fill="url(#fade)"/>
+
+  <g transform="translate(70,70)">
+    <rect x="0" y="0" width="1060" height="490" rx="28" fill="none" stroke="url(#frame)" stroke-width="2"/>
   </g>
-  <g transform="translate(80,120)">
-    <rect x="0" y="0" width="1040" height="390" rx="24" fill="#ffffff" stroke="#e5e7eb"/>
-    <rect x="32" y="32" width="200" height="6" rx="3" fill="url(#accent)"/>
-    <text x="32" y="110" font-family="Inter, Arial, sans-serif" font-size="48" font-weight="700" fill="#111827">
-      Edge of (Stochastic)
-    </text>
-    <text x="32" y="170" font-family="Inter, Arial, sans-serif" font-size="48" font-weight="700" fill="#111827">
-      Stability made simple
-    </text>
-    <text x="32" y="230" font-family="Inter, Arial, sans-serif" font-size="28" font-weight="500" fill="#6b7280">
+
+  <g transform="translate(90,430)">
+    <rect x="0" y="0" width="320" height="56" rx="28" fill="#ffffff" fill-opacity="0.12" stroke="#ffffff" stroke-opacity="0.4"/>
+    <text x="26" y="36" font-family="Inter, Arial, sans-serif" font-size="22" font-weight="600" fill="#ffffff">
       Part I
     </text>
-    <g transform="translate(32,270)">
-      <line x1="0" y1="0" x2="600" y2="0" stroke="#e5e7eb" stroke-width="2"/>
-      <line x1="0" y1="30" x2="520" y2="30" stroke="#e5e7eb" stroke-width="2"/>
-      <line x1="0" y1="60" x2="560" y2="60" stroke="#e5e7eb" stroke-width="2"/>
-    </g>
-  </g>
-  <g transform="translate(840,410)" fill="none" stroke="#111827" stroke-width="2" opacity="0.5">
-    <path d="M0,120 C20,60 60,60 80,0"/>
-    <path d="M40,120 C60,70 100,70 120,20"/>
-    <circle cx="120" cy="20" r="6" fill="#111827"/>
   </g>
 </svg>
