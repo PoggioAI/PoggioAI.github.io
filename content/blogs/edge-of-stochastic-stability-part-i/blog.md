@@ -5,11 +5,11 @@ By Pierfrancesco Beneventano
 Based on **[Edge of Stochastic Stability (Andreyev and Beneventano, arXiv:2412.20553)](https://arxiv.org/abs/2412.20553)**; correspondence to [Pierfrancesco Beneventano](https://pierbeneventano.github.io/), [pierb@mit.edu](mailto:pierb@mit.edu).
 
 <aside>
-<strong><em>What this post is about</em></strong>
+<strong><em>What this post is about:</em></strong>
+
 <em>I remember in high school manually checking the stationary points to locate minima and maxima. Later in undergrad I was told a comforting mantra: go down (follow $-\nabla L$) and you end up at a stationary point.</em>
 
-<em>This post is about these intuitions breaking for neural networks: how and why.</em>
-</aside>
+<em>This post is about these intuitions breaking for neural networks: how and why.</em></aside>
 
 ---
 
@@ -17,11 +17,11 @@ Based on **[Edge of Stochastic Stability (Andreyev and Beneventano, arXiv:2412.2
 
 ***Conceptual Map*** **(where this is going):** Inspired by the structure of those posts, I'll split this into three parts:
 
-**Part I:** a quick refresher on (full-batch) Edge of Stability (EOS) to set the scene for what comes next.
+- **Part I:** a quick refresher on (full-batch) Edge of Stability (EOS) to set the scene for what comes next.
 
-**Part II (the mini-batch case)**: what changes for SGD, why “λ_max hits 2/η” is the *wrong* diagnostic, what diagnostics we came up with, and the Edge of *Stochastic* Stability (EoSS).
+- **Part II (the mini-batch case)**: what changes for SGD, why “$\lambda_{\max}$ hits $2/\eta$” is the *wrong* diagnostic, what diagnostics we came up with, and the Edge of *Stochastic* Stability (EoSS).
 
-**Part III:** practical implications (hyperparameters, modeling SGD, and what this perspective changes).
+- **Part III:** practical implications (hyperparameters, modeling SGD, and what this perspective changes).
 
 ---
 
