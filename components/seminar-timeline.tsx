@@ -2,7 +2,7 @@ import { Calendar, Clock, MapPin, User } from "lucide-react"
 
 const seminars = [
     {
-        date: "March 3, 2025",
+        date: "March 2, 2025",
         time: "4:00 PM ET",
         speaker: "Tomaso Poggio",
         affiliation: "MIT, McGovern Institute",
