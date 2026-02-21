@@ -30,7 +30,7 @@ const seminars = [
         time: "4:00 PM ET",
         speaker: "Joe Bates",
         affiliation: "Singular Computing",
-        title: "A Billion Core",
+        title: "Billion Core Science",
         location: "McGovern Reading Room (46-5165)",
     },
 ]
