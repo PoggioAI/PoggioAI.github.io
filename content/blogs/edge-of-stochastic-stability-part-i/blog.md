@@ -17,9 +17,9 @@ Based on **[Edge of Stochastic Stability (Andreyev and Beneventano, arXiv:2412.2
 
 ***Conceptual Map*** **(where this is going):** Inspired by the structure of those posts, I'll split this into three parts:
 
-- **Part I:** a quick refresher on (full-batch) Edge of Stability (EOS) to set the scene for what comes next.
+- **Part I (this post):** a quick refresher on (full-batch) Edge of Stability (EOS) to set the scene for what comes next.
 
-- **Part II (the mini-batch case)**: what changes for SGD, why “$\lambda_{\max}$ hits $2/\eta$” is the *wrong* diagnostic, what diagnostics we came up with, and the Edge of *Stochastic* Stability (EoSS).
+- **[Part II](/blogsupdates/edge-of-stochastic-stability-part-ii):** what changes for SGD, why “$\lambda_{\max}$ hits $2/\eta$” is the *wrong* diagnostic, what diagnostics we came up with, and the Edge of *Stochastic* Stability (EoSS).
 
 - **Part III:** practical implications (hyperparameters, modeling SGD, and what this perspective changes).
 
@@ -27,14 +27,14 @@ Based on **[Edge of Stochastic Stability (Andreyev and Beneventano, arXiv:2412.2
 
 # Part I: A crash course on (full-batch) Edge of Stability
 
-In this part I introduce the phenomenon and what I believe are the two key mechanisms—which we’ll use as the springboard for the mini-batch story of **Part II**.
+In this part I introduce the phenomenon and what I believe are the two key mechanisms—which we’ll use as the springboard for the mini-batch story of **[Part II](/blogsupdates/edge-of-stochastic-stability-part-ii)**.
 
 Importantly, this part is ***not*** based on my work but on the work of [Jeremy Cohen](https://jmcohen.github.io/), [Alex Damian](https://alex-damian.github.io/) and coauthors:
 
 - [Gradient Descent on Neural Networks Typically Occurs at the Edge of Stability (Cohen et al., 2021)](https://arxiv.org/abs/2103.00065)
 - [Self-Stabilization: The Implicit Bias of Gradient Descent at the Edge of Stability (Damian et al., 2022)](https://arxiv.org/abs/2209.15594)
 
-## Where does GD stop?
+## 1) Where does GD stop?
 
 On a quadratic $L(\theta) = \frac{\lambda}{2} \theta^2$, $\lambda>0$, we can track it exactly: gradient descent (GD) with step size $\eta > 0$ has the following update: 
 
@@ -53,7 +53,7 @@ However, iterates could also diverge (for $\eta > 2/\lambda$) or oscillate in a 
 
 Classical optimization treats the latter two regimes as *‘wrong step sizes’*. Surprisingly, modern neural nets often train successfully *at* this $2/\lambda$ stability boundary—and that’s the story behind EOS.
 
-## Edge of Stability
+## 2) Edge of Stability
 
 [Jeremy](https://jmcohen.github.io/) and co-authors ([Cohen et al., 2021](https://arxiv.org/abs/2103.00065)) made (at least) 2 sharp observations:
 
@@ -64,7 +64,7 @@ Classical optimization treats the latter two regimes as *‘wrong step sizes’*
 
 ---
 
-## Mechanism 1: the instability threshold is when a power iteration happens
+## 3) Mechanism 1: the instability threshold is when a power iteration happens
 
 A major insight is that for self-stabilization to happen in full-batch algorithms, the algorithm needs to locally diverge, thus becomes unstable. Precisely, an EoS and AEoS is present when:
 
@@ -78,7 +78,7 @@ $$
 \theta_{t+1} = (I - \eta \mathcal{H}(\theta_t))\cdot \theta_t.
 $$
 
-## Mechanism 2: Progressive Sharpening causes Self-stabilization
+## 4) Mechanism 2: Progressive Sharpening causes Self-stabilization
 
 How is this possible, why is this the case unlike all the other optimization domains?
 
@@ -125,7 +125,7 @@ So:
 
 ---
 
-## Implications and Meaning
+## 5) Implications and Meaning
 
 What we said so far implies that:
 
@@ -155,7 +155,7 @@ Moreover, Edge of Stability is a mechanism that surprisingly shows that:
 
 ---
 
-## Next what? Towards SOTA Optimizers (mini-batch)
+## 6) Next what? Towards SOTA Optimizers (mini-batch)
 
 All the results we saw so far hold for full-batch algorithms, precisely, GD, preconditioned/accelerated GD, full-batch RMSProp, full-batch Adam.
 
@@ -167,10 +167,10 @@ Seemingly, they do behave differently as observed since [Keskar et al. (2016)](h
 
 However, for instance, the loss of SGD always oscillates through the training, so do we care about oscillations or instability?
 
-The punchline is, see **Part II**: for SGD, **loss oscillations are not diagnostic**, and $\lambda_{\max}$ of the full-batch Hessian typically does *not* track the relevant stability threshold—so we need a different, mini-batch-native notion of “edge.”
+The punchline is, see **[Part II](/blogsupdates/edge-of-stochastic-stability-part-ii)**: for SGD, **loss oscillations are not diagnostic**, and $\lambda_{\max}$ of the full-batch Hessian typically does *not* track the relevant stability threshold—so we need a different, mini-batch-native notion of “edge.”
 
 To bridge with the next parts, the questions here are:
 
-*How to find out whether other algorithms are working at their own version of EoS, what is that, and what are the implications?* → **Part II: The mini-batch case**
+*How to find out whether other algorithms are working at their own version of EoS, what is that, and what are the implications?* → **[Part II: The mini-batch case](/blogsupdates/edge-of-stochastic-stability-part-ii)**
 
 *Which implications carry and which new ones are there? Is this even interesting, apart the mathematical beauty of the description?* → **Part III: Getting practical**
