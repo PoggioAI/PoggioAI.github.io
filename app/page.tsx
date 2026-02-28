@@ -260,6 +260,17 @@ export default async function Home() {
         viewAllText="View all updates"
       />
 
+      <section className="px-6 pb-16">
+        <div className="max-w-6xl mx-auto flex justify-center">
+          <Link
+            href="#seminar"
+            className="inline-flex items-center gap-2 text-foreground px-6 py-3 text-sm font-medium hover:text-muted-foreground transition-colors"
+          >
+            New Seminar Series
+          </Link>
+        </div>
+      </section>
+
 
       <Footer />
     </main>
