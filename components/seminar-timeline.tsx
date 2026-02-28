@@ -33,6 +33,14 @@ const seminars = [
         title: "Billion Core Science",
         location: "McGovern Reading Room (46-5165)",
     },
+    {
+        date: "April 27, 2025",
+        time: "4:00 PM ET",
+        speaker: "Ed Boyden",
+        affiliation: "MIT",
+        title: "New Brain Mapping Tools: How Might Molecularly Annotated Connectomes Contribute to AI",
+        location: "McGovern Reading Room (46-5165)",
+    },
 ]
 
 export function SeminarTimeline() {
