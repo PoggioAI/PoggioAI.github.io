@@ -89,18 +89,18 @@ export default async function Home() {
               Blogs and Updates
               <ArrowRight className="w-4 h-4" />
             </Link>
-            <Link
+            <a
               href="#publications"
               className="inline-flex items-center gap-2 text-foreground px-6 py-3 text-sm font-medium hover:text-muted-foreground transition-colors"
             >
               View Publications
-            </Link>
-            <Link
+            </a>
+            <a
               href="#seminar"
               className="inline-flex items-center gap-2 text-foreground px-6 py-3 text-sm font-medium hover:text-muted-foreground transition-colors"
             >
               New Seminar Series
-            </Link>
+            </a>
           </div>
         </div>
       </section>
@@ -266,12 +266,12 @@ export default async function Home() {
 
       <section className="px-6 pb-16">
         <div className="max-w-6xl mx-auto flex justify-center">
-          <Link
+          <a
             href="#seminar"
             className="inline-flex items-center gap-2 text-foreground px-6 py-3 text-sm font-medium hover:text-muted-foreground transition-colors"
           >
             New Seminar Series
-          </Link>
+          </a>
         </div>
       </section>
 
