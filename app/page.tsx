@@ -95,6 +95,12 @@ export default async function Home() {
             >
               View Publications
             </Link>
+            <Link
+              href="#seminar"
+              className="inline-flex items-center gap-2 text-foreground px-6 py-3 text-sm font-medium hover:text-muted-foreground transition-colors"
+            >
+              New Seminar Series
+            </Link>
           </div>
         </div>
       </section>
