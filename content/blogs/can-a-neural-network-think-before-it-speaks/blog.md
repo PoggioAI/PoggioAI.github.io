@@ -42,11 +42,11 @@ The results from a model trained *from scratch on roughly 1,000 examples* were s
 
 Something worth noting: this is a 27 million parameter model, trained from scratch on ~1,000 examples, no pretraining, no chain-of-thought supervision, outperforming systems orders of magnitude larger on a hard reasoning benchmark. The intermediate predictions are interpretable too — in Sudoku, constraint violations gradually disappear across reasoning steps. In mazes, the path incrementally sharpens toward the optimal solution. The model isn't guessing and checking; it's genuinely refining.
 
-![HRM depth vs performance](figures/hrm/depth_param_performance.jpg)
+![HRM depth vs performance](assets/hrm/depth_param_performance.jpg)
 
 ***Figure 1 (Wang et al., 2025).** Depth matters; width does not. HRM benchmark comparison.*
 
-![HRM intermediate Sudoku steps](figures/hrm/sudoku-hard-1.jpg)
+![HRM intermediate Sudoku steps](assets/hrm/sudoku-hard-1.jpg)
 
 ***Figure 2 (Wang et al., 2025).** Intermediate Sudoku predictions. Bold = givens; red = violations; grey = changes.*
 
@@ -68,7 +68,7 @@ This analogy explains why the training works without full BPTT. It suggests conn
 
 Separately, Renee Ge's thesis work on HRM found that *layer sharing* — having the model reuse the same transformer block across all recursion steps — preserves most of the performance while cutting the parameter count substantially. A 7 million model with one shared block for L and H module respectively matches or slightly exceeds the original 27 million HRM on Sudoku. This is further confirmation that the recursive structure is doing real work.
 
-![HRM vs L-only](figures/ge_liao_arxiv/HRM_vs_8layer_L.png)
+![HRM vs L-only](assets/ge_liao_arxiv/HRM_vs_8layer_L.png)
 
 ***Figure 3 (Ge, Liao & Poggio, 2025).** 4H+4L hierarchy vs. flat 8-layer recurrence — similar performance.*
 
@@ -104,11 +104,11 @@ This single-state model with skip connections matches TRM performance on Sudoku.
 
 This is conceptually satisfying. Iterative refinement without a fixed reference point is like navigating in fog without compass — you can travel a long way and end up somewhere arbitrary. Anchoring each iteration to the initial state keeps the refinement targeted.
 
-![Refinement supervision](figures/srm/figure_refinement_supervision.jpg)
+![Refinement supervision](assets/srm/figure_refinement_supervision.jpg)
 
 ***Figure 4 (Liao & Poggio, 2025).** Point vs. segment supervision.*
 
-![Skip connections](figures/srm/figure_skip_connections_steps.jpg)
+![Skip connections](assets/srm/figure_skip_connections_steps.jpg)
 
 ***Figure 5 (Liao & Poggio, 2025).** Skip connections from initial state $z^0$ of every segment injected into each inner iteration.*
 
