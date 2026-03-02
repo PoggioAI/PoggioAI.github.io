@@ -1,4 +1,6 @@
 # Can a Neural Network Think Before It Speaks?
+Date: March 2, 2026
+By Renee Ge*, Qianli Liao*, *Contributed Equally
 
 *An overview of a line of work on latent-space reasoning—covering [Wang et al. (2025)](#hrm), [Ge (2025)](#ge-thesis), [Ge, Liao & Poggio (2025)](#ge-liao), [Jolicoeur-Martineau (2025)](#trm), and [Liao & Poggio (2025)](#srm).*
 
