@@ -121,7 +121,7 @@ This is conceptually satisfying. Iterative refinement without a fixed reference 
 The picture that emerges from this line of work is fairly clear. You don't need Chain-of-Thought to build systems that reason deeply. You don't need hierarchy, or architectural cleverness, or large parameter counts, or even large training sets. What you need is:
 
 1. **Iterative refinement** in latent space — run the same computation repeatedly until convergence.
-2. **Deep supervision** — give the model training signal at intermediate steps, not just the end.
+2. **Frequent supervision** — give the model training signal at intermediate steps, not just the end.
 3. **Access to context** — either a second state or skip connections to the initial representation.
 4. **Enough depth** — scaling effective depth (more iterations) helps more than scaling width.
 
