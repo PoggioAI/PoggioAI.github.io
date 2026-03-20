@@ -2,9 +2,9 @@
 
 Official website for the OpenPI project.
 
-**Live site:** [https://pierbeneventano.github.io/OpenPI.github.io/](https://pierbeneventano.github.io/OpenPI.github.io/)
+**Live site:** [https://openpi.github.io](https://openpi.github.io)
 
-**Code:** [https://github.com/PierBeneventano/OpenPI](https://github.com/PierBeneventano/OpenPI)
+**Code:** [https://github.com/OpenPI/OpenPI](https://github.com/OpenPI/OpenPI)
 
 ## Install
 
@@ -26,7 +26,7 @@ npm -v
 
 Then clone and install:
 ```bash
-git clone git@github.com:PierBeneventano/OpenPI.github.io.git
+git clone git@github.com:OpenPI/OpenPI.github.io.git
 cd OpenPI.github.io
 npm install
 ```
