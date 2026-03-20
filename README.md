@@ -1,10 +1,10 @@
-# OpenPI Website
+# PoggioAI Website
 
-Official website for the OpenPI project.
+Official website for the PoggioAI project.
 
-**Live site:** [https://openpi-mit.github.io](https://openpi-mit.github.io)
+**Live site:** [https://PoggioAI.github.io](https://PoggioAI.github.io)
 
-**Code:** [https://github.com/OpenPi-mit/OpenPI](https://github.com/OpenPi-mit/OpenPI)
+**Code:** [https://github.com/PoggioAI/PoggioAI_MSc](https://github.com/PoggioAI/PoggioAI_MSc)
 
 ## Install
 
@@ -26,8 +26,8 @@ npm -v
 
 Then clone and install:
 ```bash
-git clone git@github.com:OpenPi-mit/OpenPi-mit.github.io.git
-cd OpenPI.github.io
+git clone git@github.com:PoggioAI/PoggioAI.github.io.git
+cd PoggioAI.github.io
 npm install
 ```
 

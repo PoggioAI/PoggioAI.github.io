@@ -19,20 +19,20 @@ export const peopleData: Section[] = [
         type: "grid",
         members: [
             {
-                name: "Mahmoud Abdelmoneum",
-                role: "Researcher",
-                affiliation: "Massachusetts Institute of Technology & Perseus Labs",
-            },
-            {
                 name: "Pierfrancesco Beneventano",
-                role: "Researcher",
+                role: "Corresponding Researcher",
                 affiliation: "Massachusetts Institute of Technology",
                 image: "/people/pier-285x300.jpg",
                 link: "https://pierbeneventano.github.io",
             },
             {
+                name: "Mahmoud Abdelmoneum",
+                role: "Researcher",
+                affiliation: "Massachusetts Institute of Technology & Perseus Labs",
+            },
+            {
                 name: "Tomaso Poggio",
-                role: "Principal Investigator",
+                role: "Senior Researcher",
                 affiliation: "Massachusetts Institute of Technology",
                 image: "/people/poggio-240x300.jpg",
                 link: "https://poggio-lab.mit.edu",

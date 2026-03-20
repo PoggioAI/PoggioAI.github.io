@@ -9,7 +9,7 @@ const navItems: { label: string; href: string; external?: boolean }[] = [
   { label: "People", href: "/people" },
   { label: "Publications", href: "/publications" },
   { label: "Blog & Updates", href: "/blogsupdates" },
-  { label: "GitHub", href: "https://github.com/PierBeneventano/OpenPI", external: true },
+  { label: "GitHub", href: "https://github.com/PoggioAI/PoggioAI_MSc", external: true },
 ]
 
 export function Navigation() {
@@ -20,7 +20,7 @@ export function Navigation() {
       <nav className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
         <Link href="/" className="flex items-center gap-2">
           <span className="text-lg font-semibold tracking-tight text-foreground">
-            OpenPI
+            PoggioAI
           </span>
         </Link>
 

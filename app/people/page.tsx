@@ -18,7 +18,7 @@ export default function PeoplePage() {
             Who We Are
           </h1>
           <p className="text-lg text-muted-foreground leading-relaxed max-w-2xl">
-            The researchers behind OpenPI.
+            The researchers behind PoggioAI.
           </p>
         </div>
 
