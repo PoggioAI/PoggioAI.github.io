@@ -6,5 +6,5 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 export function getBasePath() {
-  return '';
+  return process.env.NODE_ENV === 'production' ? '/OpenPI.github.io' : '';
 }
