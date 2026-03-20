@@ -8,32 +8,36 @@ import { ArrowRight, ArrowUpRight, Bot, Users, FlaskConical, BookOpen, Terminal,
 import { getAllPostSlugs, getPostData } from "@/lib/blogs"
 import { blogs as staticBlogs } from "@/app/data/blogs"
 
-const capabilities = [
-  {
-    icon: Bot,
-    title: "Multi-Agent Pipeline",
-    description:
-      "22 specialist agents coordinated via LangGraph work together across literature review, theorem proving, experimentation, and paper writing.",
-  },
-  {
-    icon: Users,
-    title: "Human-on-the-Loop",
-    description:
-      "Designed to produce high-quality research with minimal steering. Go from hypothesis to written article in as few as 10 prompts.",
-  },
-  {
-    icon: FlaskConical,
-    title: "Theory & Experiments",
-    description:
-      "Parallel tracks for mathematical theorem proving with verification and computational experiment design with validation.",
-  },
-  {
-    icon: BookOpen,
-    title: "Literature-Grounded",
-    description:
-      "Automated literature review, citation management, and a persona council that critically evaluates research directions.",
-  },
-]
+/*
+ * Capabilities data — hidden for now but kept for future reuse.
+ * To re-enable, uncomment the Capabilities Section in the JSX below.
+ */
+// const capabilities = [
+//   {
+//     icon: Bot,
+//     title: "Multi-Agent Pipeline",
+//     description:
+//       "22 specialist agents coordinated via LangGraph work together across literature review, theorem proving, experimentation, and paper writing.",
+//   },
+//   {
+//     icon: Users,
+//     title: "Human-on-the-Loop",
+//     description:
+//       "Designed to produce high-quality research with minimal steering. Go from hypothesis to written article in as few as 10 prompts.",
+//   },
+//   {
+//     icon: FlaskConical,
+//     title: "Theory & Experiments",
+//     description:
+//       "Parallel tracks for mathematical theorem proving with verification and computational experiment design with validation.",
+//   },
+//   {
+//     icon: BookOpen,
+//     title: "Literature-Grounded",
+//     description:
+//       "Automated literature review, citation management, and a persona council that critically evaluates research directions.",
+//   },
+// ]
 
 const pipelineSteps = [
   {
@@ -126,62 +130,11 @@ export default async function Home() {
               href="#publications"
               className="inline-flex items-center gap-2 text-foreground px-6 py-3 text-sm font-medium hover:text-muted-foreground transition-colors"
             >
-              Read the Paper
+              Read the Papers
             </a>
           </div>
         </div>
       </section>
-
-      {/* How It Works Section */}
-      <section id="how-it-works" className="py-32 px-6 bg-card">
-        <div className="max-w-6xl mx-auto">
-          <div className="max-w-2xl mb-16">
-            <p className="text-sm font-medium tracking-widest uppercase text-muted-foreground mb-4">
-              How It Works
-            </p>
-            <h2 className="text-3xl md:text-4xl font-semibold tracking-tight text-foreground mb-6 text-balance">
-              From Hypothesis to Paper
-            </h2>
-            <p className="text-lg text-muted-foreground leading-relaxed">
-              OpenPI orchestrates 22 specialist agents through a structured research pipeline. Each stage produces artifacts that feed into the next, with human checkpoints for steering.
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-5 gap-6">
-            {pipelineSteps.map((step, index) => (
-              <div key={step.title} className="relative">
-                <div className="p-6 rounded-2xl bg-background border border-border hover:border-foreground/20 transition-colors h-full">
-                  <div className="flex items-center gap-3 mb-3">
-                    <span className="text-xs font-mono text-muted-foreground">{String(index + 1).padStart(2, '0')}</span>
-                    <step.icon className="w-5 h-5 text-foreground" />
-                  </div>
-                  <h3 className="text-sm font-semibold text-foreground mb-2">
-                    {step.title}
-                  </h3>
-                  <p className="text-xs text-muted-foreground leading-relaxed">
-                    {step.description}
-                  </p>
-                </div>
-                {index < pipelineSteps.length - 1 && (
-                  <div className="hidden md:flex absolute top-1/2 -right-3 transform -translate-y-1/2 z-10">
-                    <ArrowRight className="w-4 h-4 text-muted-foreground/40" />
-                  </div>
-                )}
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {blogPosts.length > 0 && (
-        <BlogSection
-          posts={blogPosts}
-          title="Latest Blog Posts"
-          subtitle="From the Lab"
-          id="blog"
-          viewAllLink="/blogsupdates?filter=Blog"
-        />
-      )}
 
       {/* About Section */}
       <section id="about" className="py-32 px-6 bg-card">
@@ -195,7 +148,7 @@ export default async function Home() {
                 OpenPI
               </h2>
               <p className="text-lg text-muted-foreground leading-relaxed mb-6">
-                Current AI systems require on the order of 10<sup>2</sup> to 10<sup>3</sup> prompts to go from a research idea to a written paper. OpenPI aims to reduce this to around 10 human interactions.
+                Current AI systems require on the order of 10<sup>2</sup> to 10<sup>3</sup> prompts to go from a research idea to a written paper. OpenPI aims to reduce this to up to 10 human interactions.
               </p>
               <p className="text-lg text-muted-foreground leading-relaxed mb-6">
                 This is not about fully automating research or replacing human creativity. OpenPI focuses on the rigorous establishment of ideas: matching theory with experiments, distinguishing correlation from causation, proposing parallel explanations and testing them. The human provides the idea; the system does the structured work of turning it into a solid manuscript.
@@ -210,48 +163,14 @@ export default async function Home() {
                   GitHub Repository
                   <ArrowUpRight className="w-4 h-4" />
                 </a>
-                <a
-                  href="mailto:pierb@mit.edu"
-                  className="inline-flex items-center gap-2 text-sm font-medium text-foreground hover:text-muted-foreground transition-colors"
-                >
-                  pierb@mit.edu
-                  <ArrowUpRight className="w-4 h-4" />
-                </a>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Capabilities Section */}
-      <section id="capabilities" className="py-32 px-6">
-        <div className="max-w-6xl mx-auto">
-          <div className="max-w-2xl mb-20">
-            <p className="text-sm font-medium tracking-widest uppercase text-muted-foreground mb-4">
-              Key Capabilities
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-2 gap-8 lg:gap-12">
-            {capabilities.map((cap) => (
-              <div
-                key={cap.title}
-                className="group p-8 rounded-2xl bg-card border border-border hover:border-foreground/20 transition-colors"
-              >
-                <h3 className="text-xl font-semibold text-foreground mb-3">
-                  {cap.title}
-                </h3>
-                <p className="text-muted-foreground leading-relaxed">
-                  {cap.description}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* Getting Started Section */}
-      <section id="quickstart" className="py-32 px-6 bg-card">
+      <section id="quickstart" className="py-32 px-6">
         <div className="max-w-4xl mx-auto">
           <div className="mb-12">
             <p className="text-sm font-medium tracking-widest uppercase text-muted-foreground mb-4">
@@ -307,6 +226,85 @@ python launch_multiagent.py \\
           </div>
         </div>
       </section>
+
+      {/* How It Works Section */}
+      <section id="how-it-works" className="py-32 px-6 bg-card">
+        <div className="max-w-6xl mx-auto">
+          <div className="max-w-2xl mb-16">
+            <p className="text-sm font-medium tracking-widest uppercase text-muted-foreground mb-4">
+              How It Works
+            </p>
+            <h2 className="text-3xl md:text-4xl font-semibold tracking-tight text-foreground mb-6 text-balance">
+              From Hypothesis to Paper
+            </h2>
+            <p className="text-lg text-muted-foreground leading-relaxed">
+              OpenPI orchestrates 22 specialist agents through a structured research pipeline. Each stage produces artifacts that feed into the next, with human checkpoints for steering.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-5 gap-6">
+            {pipelineSteps.map((step, index) => (
+              <div key={step.title} className="relative">
+                <div className="p-6 rounded-2xl bg-background border border-border hover:border-foreground/20 transition-colors h-full">
+                  <div className="flex items-center gap-3 mb-3">
+                    <span className="text-xs font-mono text-muted-foreground">{String(index + 1).padStart(2, '0')}</span>
+                    <step.icon className="w-5 h-5 text-foreground" />
+                  </div>
+                  <h3 className="text-sm font-semibold text-foreground mb-2">
+                    {step.title}
+                  </h3>
+                  <p className="text-xs text-muted-foreground leading-relaxed">
+                    {step.description}
+                  </p>
+                </div>
+                {index < pipelineSteps.length - 1 && (
+                  <div className="hidden md:flex absolute top-1/2 -right-3 transform -translate-y-1/2 z-10">
+                    <ArrowRight className="w-4 h-4 text-muted-foreground/40" />
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Capabilities Section — hidden for now, uncomment to re-enable
+      <section id="capabilities" className="py-32 px-6">
+        <div className="max-w-6xl mx-auto">
+          <div className="max-w-2xl mb-20">
+            <p className="text-sm font-medium tracking-widest uppercase text-muted-foreground mb-4">
+              Key Capabilities
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-8 lg:gap-12">
+            {capabilities.map((cap) => (
+              <div
+                key={cap.title}
+                className="group p-8 rounded-2xl bg-card border border-border hover:border-foreground/20 transition-colors"
+              >
+                <h3 className="text-xl font-semibold text-foreground mb-3">
+                  {cap.title}
+                </h3>
+                <p className="text-muted-foreground leading-relaxed">
+                  {cap.description}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+      */}
+
+      {blogPosts.length > 0 && (
+        <BlogSection
+          posts={blogPosts}
+          title="Latest Blog Posts"
+          subtitle="From the Lab"
+          id="blog"
+          viewAllLink="/blogsupdates?filter=Blog"
+        />
+      )}
 
       <TeamSection />
 

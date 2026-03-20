@@ -15,6 +15,12 @@ export function Footer() {
               Massachusetts Institute of Technology<br />
               Cambridge, MA 02139
             </p>
+            <a
+              href="mailto:pierb@mit.edu"
+              className="text-sm text-muted-foreground hover:text-foreground transition-colors mt-4 inline-block"
+            >
+              Contact: pierb@mit.edu
+            </a>
           </div>
 
           <div>
