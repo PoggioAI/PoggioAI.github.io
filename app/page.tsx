@@ -107,7 +107,7 @@ export default async function Home() {
             PoggioAI
           </h1>
           <p className="text-base md:text-lg text-muted-foreground italic mb-2">
-            Proof-Oriented Generative General Intelligence Orchestration: Agentic Investigation
+            <span className="font-bold">P</span>roof-<span className="font-bold">O</span>riented <span className="font-bold">G</span>enerative <span className="font-bold">G</span>eneral <span className="font-bold">I</span>ntelligence <span className="font-bold">O</span>rchestration: <span className="font-bold">A</span>gentic <span className="font-bold">I</span>nvestigation
           </p>
           <p className="text-sm text-muted-foreground mb-8">
             Made by{" "}
