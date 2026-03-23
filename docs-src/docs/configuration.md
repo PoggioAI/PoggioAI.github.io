@@ -1,12 +1,24 @@
 # Configuration
 
-PoggioAI MSc is configured through three files and CLI flags. CLI flags override config file values.
+PoggioAI MSc stores configuration in `~/.msc/config.yaml`. You can manage it via the `msc config` CLI or by editing the file directly.
 
 ---
 
-## Environment Variables (`.env`)
+## Quick Config via CLI
 
-Create a `.env` file in the project root (`cp .env.example .env`):
+```bash
+msc config get model                      # View current model
+msc config set model claude-opus-4-6      # Set primary model
+msc config set budget_usd 50              # Set default budget cap
+msc config set output_format latex         # latex or markdown
+msc config set counsel_enabled true        # Enable multi-model debate
+```
+
+---
+
+## Environment Variables
+
+API keys and service credentials are stored in `~/.msc/.env` (created by `msc setup`). You can also set them as environment variables or in a project-level `.env`:
 
 ### API Keys
 
@@ -30,13 +42,13 @@ Create a `.env` file in the project root (`cp .env.example .env`):
 | `TINKER_API_KEY` | Tinker GPU API access |
 
 !!! warning
-    Never commit your `.env` file. It is already in `.gitignore`.
+    Never commit `.env` files. They are in `.gitignore` by default.
 
 ---
 
 ## LLM Config (`.llm_config.yaml`)
 
-Controls model selection, budget enforcement, and multi-model counsel.
+For advanced control, edit `.llm_config.yaml` in the project root. This overrides `~/.msc/config.yaml` defaults.
 
 ### Model and Budget
 
@@ -71,7 +83,7 @@ Budget alerts trigger at **85%**, **95%**, and **100%** of the limit.
 
 ```yaml
 counsel:
-  enabled: false                  # Toggle via CLI with --enable-counsel
+  enabled: false                  # Toggle via msc config or --preset thorough
   max_debate_rounds: 3
   synthesis_model: claude-sonnet-4-6
   models:
@@ -81,14 +93,6 @@ counsel:
       reasoning_effort: high
     - model: gemini-3-pro-preview
       thinking_budget: 131072
-```
-
-### Persona Council
-
-```yaml
-persona_council:
-  max_debate_rounds: 3
-  synthesis_model: claude-sonnet-4-6
 ```
 
 ### Per-Agent Model Tiers
@@ -136,26 +140,20 @@ cluster:
     cudnn: cudnn/9.8.0.87-cuda12
 
   orchestrator:                    # CPU partition for LLM orchestrator
-    partition: pi_tpoggio
+    partition: your_partition
     time: "7-00:00:00"
     cpus: 4
     mem: "32G"
 
   experiment_gpu:                  # GPU partition for experiments
-    partition: pi_tpoggio
+    partition: your_gpu_partition
     time: "7-00:00:00"
     cpus: 8
     mem: "64G"
     gres: "gpu:a100:1"
-
-  repair:                          # Repair agent partition
-    partition: pi_tpoggio
-    time: "01:00:00"
-    cpus: 2
-    mem: "8G"
 ```
 
-Set cluster paths via environment variables or by editing the file directly:
+Set cluster paths via environment variables:
 
 - `CONDA_INIT_SCRIPT` — path to `conda.sh` init script
 - `CONDA_ENV_PREFIX` — conda environment path
@@ -165,9 +163,42 @@ Set cluster paths via environment variables or by editing the file directly:
 
 ---
 
-## CLI Flags Reference
+## CLI Reference
 
-### Core
+### Core Commands
+
+```
+msc setup          First-time configuration wizard
+msc run            Start a research pipeline
+msc doctor         Environment and dependency check
+msc status         Check running pipelines
+msc logs           Tail pipeline output
+msc runs           List past runs
+msc resume         Resume an interrupted run
+msc campaign       Multi-stage campaign management
+msc config         View and edit configuration
+msc budget         View spending summary
+msc notify         Configure notifications
+msc openclaw       OpenClaw autonomous oversight
+msc install        Install optional extras
+msc --help         Show help for any command
+msc --version      Show version
+```
+
+Use `msc <command> --help` for detailed usage of any subcommand.
+
+### Run Options
+
+| Flag | Default | Description |
+|------|---------|-------------|
+| `--preset` | `standard` | Research preset: `quick`, `standard`, `thorough`, `maximum` |
+| `--task-file` | — | Path to a task file (alternative to inline task string) |
+| `--output-format` | `latex` | `latex` (produces `.tex` + `.pdf`) or `markdown` |
+| `--mode` | auto-detect | Deployment mode: `local`, `tinker`, or `hpc` |
+
+### Advanced `launch_multiagent.py` Flags
+
+For fine-grained control, you can use `launch_multiagent.py` directly:
 
 | Flag | Default | Description |
 |------|---------|-------------|
@@ -175,74 +206,27 @@ Set cluster paths via environment variables or by editing the file directly:
 | `--resume <dir>` | — | Resume from an existing workspace directory |
 | `--start-from-stage <name>` | — | Restart from a specific stage (requires `--resume`) |
 | `--dry-run` | off | Validate config and API keys, then exit |
-| `--list-runs` | — | List past runs with cost and status, then exit |
-| `--output-format` | `latex` | `latex` (produces `.tex` + `.pdf`) or `markdown` |
-| `--debug` | off | Enable debug-level logging |
-
-### Model and Inference
-
-| Flag | Default | Description |
-|------|---------|-------------|
-| `--model` | from config | Override model: `claude-opus-4-6`, `claude-sonnet-4-6`, `gpt-5`, `gpt-5.4`, `gemini-3-pro-preview`, etc. |
-| `--reasoning-effort` | from config | GPT-5 reasoning: `none`, `minimal`, `low`, `medium`, `high`, `xhigh` |
-| `--verbosity` | from config | GPT-5 verbosity: `low`, `medium`, `high` |
-| `--interpreter` | `python` | Python interpreter path for experiments |
-
-### Feature Flags
-
-| Flag | Default | Description |
-|------|---------|-------------|
-| `--enable-counsel` | off | Multi-model debate (4 models per stage, ~4x cost) |
-| `--no-counsel` | — | Explicitly disable counsel even if enabled in config |
-| `--counsel-max-debate-rounds` | 3 | Debate rounds per stage in counsel mode |
-| `--enable-math-agents` | off | Enable theorem proving pipeline (proposer, prover, verifier) |
-| `--enable-tree-search` | off | DAG-layered best-first search over claim graph |
+| `--list-runs` | — | List past runs with cost and status |
+| `--model` | from config | Override model selection |
+| `--enable-counsel` | off | Multi-model debate (~4x cost) |
+| `--no-counsel` | — | Disable counsel even if enabled in config |
+| `--counsel-max-debate-rounds` | 3 | Debate rounds per stage |
+| `--enable-math-agents` | off | Theorem proving pipeline |
+| `--enable-tree-search` | off | DAG-layered best-first search |
 | `--tree-max-breadth` | 3 | Parallel branches per decision point |
-| `--tree-max-depth` | 4 | Max debug/refinement recursion depth |
-| `--tree-max-parallel` | 6 | Max concurrent tree branches |
-| `--tree-pruning-threshold` | 0.2 | Score threshold below which branches are pruned |
-| `--tree-counsel-mode` | `all_nodes` | When to run counsel in trees: `all_nodes`, `final_only`, `by_depth`, `by_node_type` |
-| `--adversarial-verification` | off | Enable hostile red-team verifier after cooperative verifiers |
-| `--enable-planning` | off | Create step-by-step research plans |
-| `--planning-interval` | 3 | Replan every N steps |
-| `--enable-milestone-gates` | off | Pause at strategic milestones for human approval via HTTP |
-| `--milestone-timeout` | 3600 | Seconds to wait at a gate before auto-proceeding |
-
-### Pipeline Control
-
-| Flag | Default | Description |
-|------|---------|-------------|
+| `--tree-max-depth` | 4 | Max recursion depth |
+| `--tree-max-parallel` | 6 | Max concurrent branches |
+| `--tree-pruning-threshold` | 0.2 | Score threshold for branch pruning |
+| `--adversarial-verification` | off | Red-team verifier after cooperative verifiers |
+| `--enable-milestone-gates` | off | Pause for human approval at milestones |
 | `--autonomous-mode` | on | Run without human checkpoints |
-| `--no-autonomous-mode` | — | Enable human approval checkpoints |
 | `--max-run-seconds` | — | Hard timeout for entire pipeline |
-| `--manager-max-steps` | — | Override manager agent max steps |
-| `--followup-max-iterations` | 3 | Max follow-up loops |
-| `--max-rebuttal-iterations` | 2 | Max reviewer rebuttal loops |
-| `--persona-debate-rounds` | 3 | Debate rounds in persona council |
-| `--no-duality-check` | — | Skip theory-experiment consistency check |
-
-### Paper Artifact Enforcement
-
-| Flag | Default | Description |
-|------|---------|-------------|
 | `--require-pdf` | off | Require `final_paper.pdf` |
-| `--enforce-paper-artifacts` | off | Require `final_paper.tex` and related files |
-| `--require-experiment-plan` | off | Also require `experiments_to_run_later.md` |
-| `--enforce-editorial-artifacts` | off | Require style guide, intro skeleton, review verdict |
-| `--min-review-score` | 8 | Minimum reviewer score to accept the paper |
-
-### Logging and Steering
-
-| Flag | Default | Description |
-|------|---------|-------------|
-| `--log-to-files` | on | Write stdout/stderr to `logs/` |
+| `--enforce-paper-artifacts` | off | Require all paper artifacts |
+| `--min-review-score` | 8 | Minimum reviewer score to accept |
 | `--no-log-to-files` | — | Print to terminal only |
-| `--no-steering` | off | Disable live TCP/HTTP steering sockets |
-| `--callback-host` | `127.0.0.1` | Host for steering server |
-| `--callback-port` | `5001` | Port for steering server |
-| `--mode` | auto-detect | Deployment mode: `local`, `tinker`, or `hpc` |
-
-Run `python launch_multiagent.py --help` for the full list.
+| `--no-steering` | off | Disable live HTTP steering |
+| `--debug` | off | Enable debug-level logging |
 
 ### Stage Name Aliases
 
@@ -253,13 +237,12 @@ When using `--start-from-stage`, these short names are accepted:
 | `literature` | `literature_review_agent` |
 | `experiment` | `experimentation_agent` |
 | `analysis` | `results_analysis_agent` |
-| `math_literature` | `math_literature_agent` |
-| `math_proposer` | `math_proposer_agent` |
-| `math_prover` | `math_prover_agent` |
-| `resources` | `resource_preparation_agent` |
 | `writeup` | `writeup_agent` |
 | `proofread` | `proofreading_agent` |
 | `review` | `reviewer_agent` |
 | `brainstorm` | `brainstorm_agent` |
 | `goals` | `formalize_goals_agent` |
 | `council` | `persona_council` |
+| `math_proposer` | `math_proposer_agent` |
+| `math_prover` | `math_prover_agent` |
+| `resources` | `resource_preparation_agent` |

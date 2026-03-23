@@ -4,33 +4,48 @@ This page covers the main workflows for using PoggioAI MSc effectively.
 
 ---
 
-## Single Research Runs
+## Running Research
 
-### Quick run (markdown, no counsel)
+### Using presets
+
+Presets are the simplest way to balance cost, time, and quality:
 
 ```bash
-python launch_multiagent.py \
-  --task "Investigate whether batch normalization reduces spectral norm growth during training" \
-  --output-format markdown \
-  --no-counsel \
-  --no-log-to-files
+# Quick test (~$2-5, 30 min)
+msc run "What are the key differences between transformer and state-space models?" --preset quick
+
+# Standard research (~$10-25, 2 hrs)
+msc run "Survey the landscape of mechanistic interpretability methods"
+
+# Publication-quality with counsel (~$40-100, 6 hrs)
+msc run "Analyze the theoretical foundations of in-context learning" --preset thorough
+
+# Maximum rigor (~$80-200, 12+ hrs)
+msc run "Comprehensive analysis of attention mechanisms" --preset maximum
 ```
 
-Cost: ~$2–10. Time: 15–40 minutes.
+### Using a task file
 
-### Publication-quality run
+For complex research directives that exceed a single command:
+
+```bash
+msc run --task-file my_task.txt
+```
+
+The task file can include structured instructions, scope constraints, specific references, and output format preferences.
+
+### Direct pipeline invocation
+
+For fine-grained control over individual flags:
 
 ```bash
 python launch_multiagent.py \
-  --task "Analyze attention mechanisms in vision transformers" \
+  --task "Investigate whether batch normalization reduces spectral norm growth" \
   --enable-counsel \
   --enable-math-agents \
   --enforce-paper-artifacts \
-  --enforce-editorial-artifacts \
   --min-review-score 8
 ```
-
-Cost: ~$40–100. Time: 4–8 hours. Requires API keys for multiple providers.
 
 ### Output directory
 
@@ -42,27 +57,41 @@ All output is written to `results/consortium_<timestamp>/`:
 | `final_paper.pdf` | Compiled PDF (latex mode) |
 | `run_summary.json` | Cost, tokens, stages completed |
 | `budget_state.json` | Cumulative spend by model |
-| `experiment_metadata.json` | Platform info, git commit, CLI args |
-| `STATUS.txt` | `COMPLETE`, `INCOMPLETE`, or `ERROR` |
-| `paper_workspace/` | Editorial artifacts, style guide, review verdicts |
+| `paper_workspace/` | Literature review, research plan, references, editorial artifacts |
 | `math_workspace/` | Claim graphs, proofs, verifications (if math agents enabled) |
-| `.checkpoints.db` | LangGraph checkpoints for resumption |
+| `STATUS.txt` | `COMPLETE`, `INCOMPLETE`, or `ERROR` |
 
 ---
 
-## Resuming Runs
-
-### Resume from last checkpoint
+## Checking Status and Logs
 
 ```bash
+msc status     # View running pipelines
+msc logs -f    # Tail live output
+msc runs       # List past runs
+```
+
+---
+
+## Resuming Interrupted Runs
+
+If a run is interrupted (network failure, budget pause, system restart):
+
+```bash
+msc resume
+```
+
+MSc persists all intermediate artifacts and pipeline state, so resumption avoids re-executing completed stages.
+
+For more control, use `launch_multiagent.py` directly:
+
+```bash
+# Resume from last checkpoint
 python launch_multiagent.py \
   --resume results/consortium_20260307_120000/ \
   --task "Continue the writing section"
-```
 
-### Resume from a specific stage
-
-```bash
+# Resume from a specific stage
 python launch_multiagent.py \
   --resume results/consortium_20260307_120000/ \
   --start-from-stage writeup
@@ -70,21 +99,17 @@ python launch_multiagent.py \
 
 See [Configuration — Stage Name Aliases](configuration.md#stage-name-aliases) for the full list of short names.
 
-### List past runs
-
-```bash
-python launch_multiagent.py --list-runs
-```
-
-Shows all runs in `results/` with cost and status.
-
 ---
 
 ## Counsel Mode
 
-Counsel mode runs each pipeline stage as a multi-model debate. Four independent models produce answers, debate for multiple rounds, then synthesize a consensus.
+Counsel mode runs each pipeline stage as a multi-model debate. Multiple frontier models (Claude, GPT, Gemini) independently evaluate the current state, then a structured aggregation protocol synthesizes their judgments. This reduces single-model blind spots.
 
 ```bash
+# Via preset
+msc run "Your research question" --preset thorough
+
+# Via direct flag
 python launch_multiagent.py \
   --task "Your research question" \
   --enable-counsel \
@@ -93,8 +118,6 @@ python launch_multiagent.py \
 
 !!! note "Requirements"
     Counsel mode requires API keys for **multiple providers** (Anthropic + OpenAI + Google). It costs roughly **4x** a single-model run.
-
-The debate models and synthesis model are configured in `.llm_config.yaml` under the `counsel` section.
 
 ---
 
@@ -141,10 +164,8 @@ Tree search integrates at four points in the pipeline: ideation, theory track, e
 --enable-tree-search --enable-counsel --tree-counsel-mode all_nodes
 ```
 
-Counsel-in-tree modes:
-
-| Mode | Behavior |
-|------|----------|
+| Counsel-in-tree Mode | Behavior |
+|----------------------|----------|
 | `all_nodes` | Run counsel at every tree node (default, most expensive) |
 | `final_only` | Only counsel on the final selected branch |
 | `by_depth` | Counsel only at certain depth levels |
@@ -154,20 +175,30 @@ Counsel-in-tree modes:
 
 ## Campaigns (Multi-Stage Research)
 
-Campaigns chain multiple pipeline runs together, passing artifacts forward through memory distillation. Use campaigns when your research requires distinct phases (e.g., theory first, then experiments, then paper).
+Campaigns orchestrate multi-stage research projects where each stage builds on prior results. Use them for projects that span multiple related questions or require iterative deepening.
 
-### Create a campaign
+### Create and launch a campaign
 
 ```bash
-python scripts/campaign_cli.py \
-  init-campaign \
-  --name "Normalization Study" \
-  --task automation_tasks/my_task.txt \
-  --budget 500 \
-  --auto-approve
+# Initialize from a research directive
+msc campaign init --name "my_project" --task "Investigate the role of normalization layers in transformer training dynamics"
+
+# Review and customize the generated campaign spec
+# (edit my_project_campaign.yaml as needed)
+
+# Launch the campaign
+msc campaign start my_project_campaign.yaml
+
+# Monitor progress
+msc campaign status my_project_campaign.yaml
+
+# List all campaigns
+msc campaign list
 ```
 
-Or write a `campaign.yaml` manually:
+### Campaign YAML structure
+
+For manual control, write a `campaign.yaml`:
 
 ```yaml
 name: my_research
@@ -195,7 +226,7 @@ stages: []                         # Leave empty for dynamic planning
 
 ### Static stages
 
-For manual control, define stages explicitly:
+Define stages explicitly with dependencies and artifact contracts:
 
 ```yaml
 stages:
@@ -222,131 +253,75 @@ stages:
       required: [final_paper.pdf]
 ```
 
-### Run the campaign
+### Campaign heartbeat
+
+The heartbeat advances campaign state — call it on a schedule:
 
 ```bash
 # Initialize
 python scripts/campaign_heartbeat.py --campaign campaign.yaml --init
 
-# Check status
-python scripts/campaign_heartbeat.py --campaign campaign.yaml --status
-
-# Run one heartbeat tick (launches ready stages, advances state)
+# Run one tick
 python scripts/campaign_heartbeat.py --campaign campaign.yaml
-
-# Or validate without launching
-python scripts/campaign_heartbeat.py --campaign campaign.yaml --validate
 ```
 
-The heartbeat is designed to be called on a schedule (e.g., every 15 minutes via cron). Each tick checks dependencies, launches ready stages, and advances the campaign state.
-
-### Heartbeat exit codes
-
-| Code | Meaning |
-|------|---------|
+| Exit Code | Meaning |
+|-----------|---------|
 | `0` | Campaign complete (all stages done) |
 | `1` | Campaign in progress (normal tick) |
 | `2` | Failed stage (human attention needed) |
 | `3` | Just advanced (new stage launched) |
 | `4` | Campaign stuck (max idle ticks or unsatisfiable deps) |
 
-### Campaign CLI commands
-
-The campaign CLI (`scripts/campaign_cli.py`) provides JSON-based management:
-
-```bash
-python scripts/campaign_cli.py --campaign campaign.yaml <command>
-```
-
-| Command | Description |
-|---------|-------------|
-| `status` | Full campaign status with budget snapshot |
-| `dashboard` | Compact one-screen overview |
-| `launch <stage_id>` | Manually launch a stage |
-| `repair <stage_id>` | Trigger autonomous repair of a failed stage |
-| `budget` | Budget summary |
-| `stage-logs <stage_id>` | View stage logs (`--tail N` for last N lines) |
-| `stage-artifacts <stage_id>` | Check artifact presence |
-| `analyze-logs <stage_id>` | Structured log analysis |
-| `set-stage-status <id> <status>` | Override status: `pending`, `in_progress`, `completed`, `failed` |
-| `launchable` | List stages ready to launch |
-| `distill <stage_id>` | Run memory distillation for a stage |
-| `show-plan` | Show proposed dynamic plan |
-| `approve-plan` / `reject-plan` | Approve or reject dynamic plan |
-| `archive` | Archive finished campaign to `archive/` |
-| `archive-all` | Archive all finished campaigns |
-| `check-credits` | Verify API access and credit balance |
-| `validate-pipeline` | Validate all stages use v2 pipeline |
+Campaigns support automatic archival, budget enforcement with threshold alerts, artifact validation gates, and resume-on-failure.
 
 ---
 
-## Budget Control
-
-### Per-run budget
-
-Budget is configured in `.llm_config.yaml` under `budget.usd_limit`. The pipeline halts cleanly when the limit is reached, preserving all artifacts produced so far.
-
-Alerts trigger at **85%**, **95%**, and **100%** of the budget.
-
-### Per-campaign budget
-
-Set in `campaign.yaml` at the top level or per-stage.
-
-### Token usage report
+## Budget Management
 
 ```bash
-python scripts/export_private_token_report.py --output report.csv
+msc budget                              # Spending summary across all runs
+msc budget --results-dir results/myrun  # Spending for a specific run
+msc config set budget_usd 50            # Set default cap
 ```
 
-The private token ledger is stored at `.local/private_token_usage/api_token_calls.jsonl`.
+Budget enforcement is hard-capped: the pipeline halts cleanly when the limit is reached, preserving all artifacts. Alerts trigger at **85%**, **95%**, and **100%**.
 
 ---
 
-## Live Steering
+## Notifications
 
-While a run is active, you can inject mid-run instructions via the HTTP steering API (port 5002). This is useful for course-correcting experiments or skipping phases.
+Stay informed about long-running pipelines without watching the terminal:
 
-Disable with `--no-steering` in containerized or restricted environments.
+```bash
+msc notify setup                 # Interactive notification setup
+msc notify test --channel telegram   # Test a configured channel
+```
+
+Notifications fire on run completion, budget threshold warnings, and pipeline errors. Supported channels: **Telegram** and **Slack**.
+
+---
+
+## OpenClaw Integration
+
+OpenClaw provides optional autonomous oversight for long-running campaigns. It monitors pipeline health, detects stalls, and can trigger repairs without human intervention.
+
+```bash
+msc openclaw setup     # One-time setup
+msc openclaw start     # Start the oversight agent
+msc openclaw status    # Check oversight status
+```
+
+OpenClaw is particularly useful for HPC deployments where runs span multiple SLURM jobs.
 
 ---
 
 ## Adversarial Verification
 
-For higher confidence in results, enable a hostile red-team verifier that runs after the cooperative verifiers:
+For higher confidence in results, enable a hostile red-team verifier:
 
 ```bash
 python launch_multiagent.py \
   --task "Your question" \
   --adversarial-verification
 ```
-
----
-
-## Monitoring
-
-```bash
-# Check run status
-cat results/consortium_<timestamp>/STATUS.txt
-
-# View cumulative cost
-cat results/consortium_<timestamp>/budget_state.json
-
-# View run summary
-cat results/consortium_<timestamp>/run_summary.json
-
-# Campaign monitoring
-python scripts/campaign_monitor.py --campaign campaign.yaml
-```
-
----
-
-## Utility Scripts
-
-| Script | Purpose |
-|--------|---------|
-| `scripts/preflight_check.py` | Validate environment (`--with-latex`, `--with-docs`, `--with-experiment`) |
-| `scripts/export_private_token_report.py` | Export token usage to CSV |
-| `scripts/campaign_monitor.py` | Monitor long-running campaigns |
-| `scripts/run_campaign_planner.py` | Generate campaign spec from a task file |
-| `scripts/setup_mode.py` | Interactive configuration wizard |
-| `scripts/lemma_library_cli.py` | Manage the math lemma library |

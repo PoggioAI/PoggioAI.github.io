@@ -15,27 +15,28 @@ This guide covers deploying PoggioAI MSc on SLURM-managed HPC clusters.
 ```bash
 # 1. Clone and enter the repo
 git clone https://github.com/PoggioAI/PoggioAI_MSc.git && cd PoggioAI_MSc
+git checkout MSc_Prod
 
-# 2. Bootstrap the environment (full includes GPU experiment deps)
-./scripts/bootstrap.sh consortium full
+# 2. Create environment and install
+conda create -n msc python=3.12 -y
+conda activate msc
+pip install -e ".[all]"
 
-# 3. Set up API keys
-cp .env.example .env
-# Edit .env with your keys
+# 3. Run setup wizard
+msc setup
 
 # 4. Configure cluster paths
 # Either edit engaging_config.yaml directly, or set env vars:
 export CONDA_INIT_SCRIPT=/path/to/miniforge3/etc/profile.d/conda.sh
-export CONDA_ENV_PREFIX=/path/to/conda/envs/consortium
+export CONDA_ENV_PREFIX=/path/to/conda/envs/msc
 export REPO_ROOT=/path/to/PoggioAI_MSc
 export SLURM_OUTPUT_DIR=/path/to/slurm_outputs
 
 # 5. Validate
-conda activate consortium
-python launch_multiagent.py --task "test" --dry-run
+msc doctor
 
-# 6. Submit the orchestrator
-RESEARCH_TASK="Your research prompt here" ./scripts/submit_orchestrator.sh --no-counsel
+# 6. Run in HPC mode
+msc run --mode hpc "Analyze convergence properties of adaptive optimizers"
 ```
 
 ---
@@ -105,30 +106,53 @@ cluster:
     Set paths via environment variables so the same config file works across users:
     ```bash
     export CONDA_INIT_SCRIPT=/path/to/conda.sh
-    export CONDA_ENV_PREFIX=/path/to/envs/consortium
+    export CONDA_ENV_PREFIX=/path/to/envs/msc
     export REPO_ROOT=/path/to/PoggioAI_MSc
     export SLURM_OUTPUT_DIR=/path/to/slurm_outputs
     ```
 
 ---
 
-## Running Campaigns on SLURM
+## Running on SLURM
+
+### Single run
+
+```bash
+msc run --mode hpc "Your research question"
+```
+
+This submits pipeline stages as SLURM jobs with appropriate resource requests, handles job dependencies, and manages cross-node state.
+
+### Campaigns on SLURM
 
 Campaigns work well with SLURM — the heartbeat launches each stage as a SLURM job:
 
 ```bash
 # Initialize
-python scripts/campaign_heartbeat.py --campaign campaign.yaml --init
+msc campaign init --name "my_project" --task "Your research directive"
 
-# Run heartbeat (advances stages, submits SLURM jobs)
-python scripts/campaign_heartbeat.py --campaign campaign.yaml
+# Launch
+msc campaign start my_project_campaign.yaml
+
+# Monitor
+msc campaign status my_project_campaign.yaml
 ```
 
 For automated scheduling, use the OpenClaw overseer or a cron job to call the heartbeat periodically:
 
 ```bash
 # Example crontab entry (every 15 minutes)
-*/15 * * * * cd /path/to/PoggioAI_MSc && conda activate consortium && python scripts/campaign_heartbeat.py --campaign campaign.yaml
+*/15 * * * * cd /path/to/PoggioAI_MSc && conda activate msc && python scripts/campaign_heartbeat.py --campaign campaign.yaml
+```
+
+### OpenClaw oversight
+
+For long-running campaigns on HPC, OpenClaw provides autonomous monitoring:
+
+```bash
+msc openclaw setup
+msc openclaw start
+msc openclaw status
 ```
 
 ---
@@ -142,14 +166,16 @@ squeue -u $USER
 # Check orchestrator output
 cat slurm_outputs/orch_<job_id>.out
 
-# List past runs with cost
-python launch_multiagent.py --list-runs
+# MSc commands
+msc status                         # Running pipelines
+msc runs                           # Past runs
+msc budget                         # Spending summary
 
-# Check experiment GPU job logs
+# Experiment GPU job logs
 cat results/consortium_*/experiment_runs/*/slurm_logs/exp_*.out
 
-# Campaign status
-python scripts/campaign_cli.py --campaign campaign.yaml dashboard
+# Campaign dashboard
+msc campaign status campaign.yaml
 ```
 
 ---
@@ -188,15 +214,15 @@ cat results/consortium_*/experiment_runs/*/slurm_logs/exp_*.err
 The orchestrator needs **outbound internet access**. If compute nodes don't have it, run the orchestrator on a login node or a partition with internet:
 
 ```bash
-conda activate consortium
+conda activate msc
 nohup python launch_multiagent.py --task "..." --no-counsel &
 ```
 
 ### LaTeX/PDF compilation fails
 
 ```bash
-# Install TeX toolchain in conda env
-./scripts/bootstrap.sh consortium latex
+# Install TeX toolchain
+pip install -e ".[docs]"
 
 # Or point to your system TeX installation
 export CONSORTIUM_TEXLIVE_BIN=/path/to/texlive/bin
@@ -206,6 +232,9 @@ export CONSORTIUM_TEXLIVE_BIN=/path/to/texlive/bin
 
 ```bash
 # Check what's happening
+msc campaign status campaign.yaml
+
+# Or use the CLI for detailed analysis
 python scripts/campaign_cli.py --campaign campaign.yaml analyze-logs <stage_id>
 
 # Force status reset if the underlying job died
