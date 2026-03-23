@@ -10,7 +10,7 @@ const navItems: { label: string; href: string; external?: boolean }[] = [
   { label: "Publications", href: "/publications" },
   { label: "Blog & Updates", href: "/blogsupdates" },
   { label: "Docs", href: "/docs/", external: true },
-  { label: "GitHub", href: "https://github.com/PoggioAI/PoggioAI_MSc", external: true },
+  { label: "GitHub", href: "https://github.com/PoggioAI/PoggioAI_MSc/tree/MSc_Prod", external: true },
 ]
 
 export function Navigation() {

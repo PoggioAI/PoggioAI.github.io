@@ -1,7 +1,7 @@
 site_name: PoggioAI MSc Documentation
 site_url: https://poggioai.github.io/docs/
 site_description: Setup and usage guide for PoggioAI MSc
-repo_url: https://github.com/PoggioAI/PoggioAI_MSc
+repo_url: https://github.com/PoggioAI/PoggioAI_MSc/tree/MSc_Prod
 repo_name: PoggioAI/PoggioAI_MSc
 
 theme:
@@ -64,6 +64,6 @@ extra:
   homepage: https://poggioai.github.io
   social:
     - icon: fontawesome/brands/github
-      link: https://github.com/PoggioAI/PoggioAI_MSc
+      link: https://github.com/PoggioAI/PoggioAI_MSc/tree/MSc_Prod
     - icon: fontawesome/brands/discord
       link: https://discord.gg/qSb23gTD
