@@ -23,6 +23,8 @@
 # misc
 .DS_Store
 *.pem
+__pycache__/
+*.pyc
 
 # debug
 npm-debug.log*
@@ -42,3 +44,9 @@ next-env.d.ts
 
 # mkdocs local build
 docs-src/site/
+
+# local Codex worktrees
+.claude/worktrees/
+
+# generated blog conversion output
+/generated/

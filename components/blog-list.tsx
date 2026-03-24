@@ -1,8 +1,7 @@
 "use client"
 
-import { useState, useEffect, Suspense } from "react"
+import { useState, useEffect } from "react"
 import Link from "next/link"
-import { useSearchParams } from "next/navigation"
 import { ArrowRight, ExternalLink, Youtube, FileText } from "lucide-react"
 import { BlogIcon } from "@/components/blog-icon"
 import { PdfIcon } from "@/components/pdf-icon"
@@ -47,11 +46,11 @@ interface BlogListProps {
 }
 
 function BlogListContent({ posts }: BlogListProps) {
-    const searchParams = useSearchParams()
-    const initialFilter = searchParams.get('filter')
     const [filter, setFilter] = useState<string>('All')
 
     useEffect(() => {
+        const initialFilter = new URLSearchParams(window.location.search).get('filter')
+
         if (initialFilter) {
             if (initialFilter === 'Blog' || initialFilter === 'Updates') {
                 setFilter(initialFilter)
@@ -59,7 +58,7 @@ function BlogListContent({ posts }: BlogListProps) {
                 setFilter('All')
             }
         }
-    }, [initialFilter])
+    }, [])
 
     const filteredPosts = posts.filter(post => {
         if (filter === 'All') return true;
@@ -185,15 +184,20 @@ function BlogListContent({ posts }: BlogListProps) {
                         </article>
                     );
                 })}
+
+                {filteredPosts.length === 0 && (
+                    <div className="rounded-2xl border border-dashed border-border bg-card/50 p-8">
+                        <h2 className="text-lg font-semibold text-foreground mb-2">No posts yet</h2>
+                        <p className="text-sm text-muted-foreground leading-relaxed">
+                            Updates and research notes will appear here as they are published.
+                        </p>
+                    </div>
+                )}
             </div>
         </div>
     )
 }
 
 export function BlogList(props: BlogListProps) {
-    return (
-        <Suspense fallback={<div>Loading...</div>}>
-            <BlogListContent {...props} />
-        </Suspense>
-    )
+    return <BlogListContent {...props} />
 }

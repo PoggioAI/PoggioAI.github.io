@@ -31,6 +31,16 @@ export const peopleData: Section[] = [
                 affiliation: "Massachusetts Institute of Technology & Perseus Labs",
             },
             {
+                name: "Riccardo Neumarker",
+                role: "Visiting Researcher",
+                image: "/people/riccardo_n.jpeg",
+            },
+            {
+                name: "Emanuele Rimoldi",
+                role: "Visiting Researcher",
+                image: "/people/emanuele_r.jpg",
+            },
+            {
                 name: "Tomaso Poggio",
                 role: "Senior Researcher",
                 affiliation: "Massachusetts Institute of Technology",

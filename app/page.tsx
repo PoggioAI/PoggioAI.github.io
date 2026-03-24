@@ -110,15 +110,13 @@ export default async function Home() {
             <span className="font-bold">P</span>roof-<span className="font-bold">O</span>riented <span className="font-bold">G</span>enerative <span className="font-bold">G</span>eneral <span className="font-bold">I</span>ntelligence <span className="font-bold">O</span>rchestration: <span className="font-bold">A</span>gentic <span className="font-bold">I</span>nvestigation
           </p>
           <p className="text-sm text-muted-foreground mb-8">
-            Made by{" "}
-            <a
-              href="https://poggio-lab.mit.edu"
-              target="_blank"
-              rel="noopener noreferrer"
+            Built by the{" "}
+            <Link
+              href="/people"
               className="underline hover:text-foreground transition-colors"
             >
-              PoggioLab at MIT
-            </a>
+              PoggioAI team at MIT
+            </Link>
           </p>
           <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed mb-12 text-pretty">
             Try PoggioAI/MSc, a multi-agent AI system that turns research hypotheses into high-quality, literature-grounded, experiment-backed papers with minimal human steering.
