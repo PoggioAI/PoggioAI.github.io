@@ -58,8 +58,13 @@ export async function getPostData(slug: string) {
 
     const content = lines.slice(contentStartIndex).join('\n');
 
-    // Generate excerpt (first 200 chars, removing markdown formatting)
-    const excerpt = content.slice(0, 200).replace(/[#*]/g, '').trim() + '...';
+    // Generate a plain-text excerpt for cards and list views.
+    const plainTextContent = content
+        .replace(/\[([^\]]+)\]\([^)]+\)/g, '$1')
+        .replace(/[`#*_>~-]/g, '')
+        .replace(/\s+/g, ' ')
+        .trim();
+    const excerpt = plainTextContent.slice(0, 200).trim() + '...';
 
     return {
         slug,
