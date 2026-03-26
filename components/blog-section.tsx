@@ -56,20 +56,20 @@ export function BlogSection({
 }: BlogSectionProps) {
 
   return (
-    <section id={id} className="py-32 px-6 bg-background">
+    <section id={id} className="py-24 px-6 bg-background">
       <div className="max-w-7xl mx-auto">
-        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-16">
+        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-16 border-b border-border pb-8">
           <div className="max-w-2xl">
-            <p className="text-sm font-medium tracking-widest uppercase text-muted-foreground mb-4">
-              {subtitle}
-            </p>
-            <h2 className="text-3xl md:text-4xl font-semibold tracking-tight text-foreground text-balance">
+            <h2 className="text-3xl md:text-5xl font-bold tracking-tight text-foreground mb-6 text-balance">
               {title}
             </h2>
+            <p className="text-lg text-muted-foreground leading-relaxed">
+              {subtitle}
+            </p>
           </div>
           <Link
             href={viewAllLink}
-            className="inline-flex items-center gap-2 text-sm font-medium text-foreground hover:text-muted-foreground transition-colors group"
+            className="group inline-flex items-center gap-2 text-sm font-medium text-foreground hover:text-primary transition-colors shrink-0"
           >
             {viewAllText}
             <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />

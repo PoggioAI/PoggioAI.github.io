@@ -152,16 +152,6 @@ export default function PoggioAIMScPaperPage() {
                 <h2 className="text-xl font-semibold tracking-tight">Abstract</h2>
               </div>
               <p className="text-base leading-8 text-muted-foreground">{abstract}</p>
-
-              <h3 className="mt-10 text-lg font-semibold tracking-tight text-foreground">
-                Why this page exists
-              </h3>
-              <p className="mt-4 text-base leading-8 text-muted-foreground">
-                This page is the stable landing page for the report. It provides
-                title, author, abstract, version, and PDF metadata in a format
-                that is easier for search engines and academic indexers to crawl
-                than a raw PDF alone.
-              </p>
             </article>
 
             <aside className="space-y-6">

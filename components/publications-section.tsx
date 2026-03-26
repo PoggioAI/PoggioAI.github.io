@@ -1,4 +1,4 @@
-import { ArrowUpRight, FileText } from "lucide-react"
+import { ArrowRight, FileText } from "lucide-react"
 import Link from "next/link"
 import publicationsData from "@/app/data/publications.json"
 
@@ -6,23 +6,23 @@ const publications = publicationsData.slice(0, 5)
 
 export function PublicationsSection() {
   return (
-    <section id="publications" className="py-32 px-6">
+    <section id="publications" className="py-24 px-6">
       <div className="max-w-7xl mx-auto">
-        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-16">
+        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-16 border-b border-border pb-8">
           <div className="max-w-2xl">
-            <p className="text-sm font-medium tracking-widest uppercase text-muted-foreground mb-4">
+            <h2 className="text-3xl md:text-5xl font-bold tracking-tight text-foreground mb-6 text-balance">
               Publications
-            </p>
-            <h2 className="text-3xl md:text-4xl font-semibold tracking-tight text-foreground text-balance">
-              Recent work
             </h2>
+            <p className="text-lg text-muted-foreground leading-relaxed">
+              Recent work from PoggioAI.
+            </p>
           </div>
           <Link
             href="/publications"
-            className="text-sm font-medium text-foreground hover:text-muted-foreground transition-colors inline-flex items-center gap-1"
+            className="group inline-flex items-center gap-2 text-sm font-medium text-foreground hover:text-primary transition-colors shrink-0"
           >
             View all publications
-            <ArrowUpRight className="w-4 h-4" />
+            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
           </Link>
         </div>
 
@@ -51,7 +51,7 @@ export function PublicationsSection() {
                 <p className="text-sm text-muted-foreground mb-1">{pub.authors}</p>
                 <p className="text-sm font-medium text-foreground/70">{pub.venue}</p>
               </div>
-              <ArrowUpRight className="w-5 h-5 text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity shrink-0" />
+              <ArrowRight className="w-5 h-5 text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity shrink-0" />
             </Link>
           ))}
         </div>
