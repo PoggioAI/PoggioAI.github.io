@@ -1,6 +1,6 @@
-# PoggioAI Website
+# pAI Website
 
-Official website for the PoggioAI project.
+Official website for the pAI project.
 
 **Live site:** [https://PoggioAI.github.io](https://PoggioAI.github.io)
 

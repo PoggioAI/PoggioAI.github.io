@@ -1,6 +1,6 @@
 # HPC / SLURM Setup
 
-This guide covers deploying PoggioAI MSc on SLURM-managed HPC clusters.
+This guide covers deploying pAI MSc on SLURM-managed HPC clusters.
 
 ---
 
@@ -43,7 +43,7 @@ msc run --mode hpc "Analyze convergence properties of adaptive optimizers"
 
 ## Two-Tier Execution Model
 
-PoggioAI MSc uses two tiers of SLURM jobs:
+pAI MSc uses two tiers of SLURM jobs:
 
 ### Tier 1: Orchestrator (CPU)
 

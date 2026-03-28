@@ -1,6 +1,6 @@
 # Getting Started
 
-Get PoggioAI MSc running in under 10 minutes.
+Get pAI MSc running in under 10 minutes.
 
 ---
 

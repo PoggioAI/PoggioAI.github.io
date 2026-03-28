@@ -4,8 +4,8 @@ import { ArrowUpRight, FileText } from "lucide-react"
 import rawPublications from "@/app/data/publications.json"
 
 export const metadata: Metadata = {
-    title: "Publications | PoggioAI",
-    description: "Recent publications and research from PoggioAI.",
+    title: "Publications | pAI",
+    description: "Recent publications and research from pAI.",
 }
 
 

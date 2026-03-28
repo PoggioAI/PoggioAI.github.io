@@ -104,10 +104,10 @@ export default async function Home() {
             Massachusetts Institute of Technology
           </p>
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-semibold tracking-tight text-foreground leading-[1.1] text-balance mb-4">
-            PoggioAI
+            pAI
           </h1>
           <p className="text-base md:text-lg text-muted-foreground italic mb-2">
-            <span className="font-bold">P</span>roof-<span className="font-bold">O</span>riented <span className="font-bold">G</span>enerative <span className="font-bold">G</span>eneral <span className="font-bold">I</span>ntelligence <span className="font-bold">O</span>rchestration: <span className="font-bold">A</span>gentic <span className="font-bold">I</span>nvestigation
+            Principal (Agentic) Investigator
           </p>
           <p className="text-sm text-muted-foreground mb-8">
             Built by the{" "}
@@ -121,7 +121,7 @@ export default async function Home() {
             </a>
           </p>
           <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed mb-12 text-pretty">
-            Try PoggioAI/MSc, a multi-agent AI system that turns research hypotheses into high-quality, literature-grounded, experiment-backed papers with minimal human steering.
+            Try pAI/MSc, a multi-agent AI system that turns research hypotheses into high-quality, literature-grounded, experiment-backed papers with minimal human steering.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <a
@@ -168,13 +168,13 @@ export default async function Home() {
                 About the Project
               </p>
               <h2 className="text-3xl md:text-4xl font-semibold tracking-tight text-foreground mb-6 text-balance">
-                PoggioAI
+                pAI
               </h2>
               <p className="text-lg text-muted-foreground leading-relaxed mb-6">
-                Current AI systems require on the order of 10<sup>2</sup> to 10<sup>3</sup> prompts to go from a research idea to a written paper. PoggioAI aims to reduce this to up to 10 human interactions.
+                Current AI systems require on the order of 10<sup>2</sup> to 10<sup>3</sup> prompts to go from a research idea to a written paper. pAI aims to reduce this to up to 10 human interactions.
               </p>
               <p className="text-lg text-muted-foreground leading-relaxed mb-6">
-                This is not about fully automating research or replacing human creativity. PoggioAI focuses on the rigorous establishment of ideas: matching theory with experiments, distinguishing correlation from causation, proposing parallel explanations and testing them. The human provides the idea; the system does the structured work of turning it into a solid manuscript.
+                This is not about fully automating research or replacing human creativity. pAI focuses on the rigorous establishment of ideas: matching theory with experiments, distinguishing correlation from causation, proposing parallel explanations and testing them. The human provides the idea; the system does the structured work of turning it into a solid manuscript.
               </p>
               <div className="flex flex-wrap gap-4">
                 <a
@@ -262,7 +262,7 @@ python launch_multiagent.py \\
               From Hypothesis to Paper
             </h2>
             <p className="text-lg text-muted-foreground leading-relaxed">
-              PoggioAI orchestrates 22 specialist agents through a structured research pipeline. Each stage produces artifacts that feed into the next, with human checkpoints for steering.
+              pAI orchestrates 22 specialist agents through a structured research pipeline. Each stage produces artifacts that feed into the next, with human checkpoints for steering.
             </p>
           </div>
 

@@ -1,6 +1,6 @@
 # Usage
 
-This page covers the main workflows for using PoggioAI MSc effectively.
+This page covers the main workflows for using pAI MSc effectively.
 
 ---
 

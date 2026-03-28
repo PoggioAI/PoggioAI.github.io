@@ -5,8 +5,8 @@ import { Navigation } from "@/components/navigation"
 import { Footer } from "@/components/footer"
 
 export const metadata: Metadata = {
-  title: "Docs | PoggioAI",
-  description: "Documentation hub for PoggioAI MSc.",
+  title: "Docs | pAI",
+  description: "Documentation hub for pAI MSc.",
 }
 
 const guides = [
@@ -48,7 +48,7 @@ export default function DocsPage() {
               Documentation
             </p>
             <h1 className="text-4xl md:text-5xl font-semibold tracking-tight text-foreground mb-6 text-balance">
-              PoggioAI MSc Docs
+              pAI MSc Docs
             </h1>
             <p className="text-lg text-muted-foreground leading-relaxed">
               The full MSc documentation lives alongside the project repo. This page is a lightweight hub to the setup,

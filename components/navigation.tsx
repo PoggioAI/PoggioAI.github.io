@@ -21,7 +21,7 @@ export function Navigation() {
       <nav className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
         <Link href="/" className="flex items-center gap-2">
           <span className="text-lg font-semibold tracking-tight text-foreground">
-            PoggioAI
+            pAI
           </span>
         </Link>
 

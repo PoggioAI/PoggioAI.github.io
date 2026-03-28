@@ -146,7 +146,7 @@ export function BlogIcon({ slug, className }: BlogIconProps) {
         const label = slug
             .split("-")
             .map((part) => {
-                if (part === "poggioai") return "PoggioAI"
+                if (part === "poggioai") return "pAI"
                 if (part === "msc") return "MSc"
                 if (part === "ai") return "AI"
                 return part.charAt(0).toUpperCase() + part.slice(1)

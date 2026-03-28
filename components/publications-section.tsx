@@ -14,7 +14,7 @@ export function PublicationsSection() {
               Publications
             </h2>
             <p className="text-lg text-muted-foreground leading-relaxed">
-              Recent work from PoggioAI.
+              Recent work from pAI.
             </p>
           </div>
           <Link

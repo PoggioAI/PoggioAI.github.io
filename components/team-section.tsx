@@ -15,7 +15,7 @@ export function TeamSection() {
               Team
             </h2>
             <p className="text-lg text-muted-foreground leading-relaxed">
-              The researchers behind PoggioAI.
+              The researchers behind pAI.
             </p>
           </div>
           <Link

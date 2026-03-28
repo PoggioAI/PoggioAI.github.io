@@ -11,19 +11,19 @@ const landingUrl = `${siteUrl}${landingPath}`
 const pdfUrl = `${siteUrl}${pdfPath}`
 const githubUrl = "https://github.com/PoggioAI/PoggioAI_MSc/tree/MSc_Prod"
 
-const title = "PoggioAI/MSc: ML Theory Research with Humans on the Loop"
+const title = "pAI/MSc: ML Theory Research with Humans on the Loop"
 const authors = [
   "Mahmoud Abdelmoneum",
   "Pierfrancesco Beneventano",
   "Tomaso Poggio",
 ]
 const description =
-  "Technical report for PoggioAI/MSc, an open-source modular multi-agent system for academic research workflows with a current emphasis on machine learning theory."
+  "Technical report for pAI/MSc, an open-source modular multi-agent system for academic research workflows with a current emphasis on machine learning theory."
 const abstract =
-  "We present PoggioAI/MSc, an open-source, customizable, modular multi-agent system for academic research workflows. Our goal is not autonomous scientific ideation, nor fully automated research. It is narrower and more practical: to reduce by orders of magnitude the human steering required to turn a specified hypothesis into a literature-grounded, mathematically established, experimentally supported, submission-oriented manuscript draft. PoggioAI/MSc is built with a current emphasis on machine learning theory and adjacent quantitative fields."
+  "We present pAI/MSc, an open-source, customizable, modular multi-agent system for academic research workflows. Our goal is not autonomous scientific ideation, nor fully automated research. It is narrower and more practical: to reduce by orders of magnitude the human steering required to turn a specified hypothesis into a literature-grounded, mathematically established, experimentally supported, submission-oriented manuscript draft. pAI/MSc is built with a current emphasis on machine learning theory and adjacent quantitative fields."
 
 export const metadata: Metadata = {
-  title: `${title} | PoggioAI`,
+  title: `${title} | pAI`,
   description,
   alternates: {
     canonical: landingUrl,
@@ -33,7 +33,7 @@ export const metadata: Metadata = {
     description,
     type: "article",
     url: landingUrl,
-    siteName: "PoggioAI",
+    siteName: "pAI",
   },
   authors: authors.map((name) => ({ name })),
   other: {
@@ -46,7 +46,7 @@ export const metadata: Metadata = {
     citation_pdf_url: pdfUrl,
     citation_fulltext_html_url: landingUrl,
     citation_keywords: [
-      "PoggioAI",
+      "pAI",
       "machine learning theory",
       "multi-agent systems",
       "academic research workflows",
@@ -78,7 +78,7 @@ const jsonLd = {
   })),
   publisher: {
     "@type": "Organization",
-    name: "PoggioAI",
+    name: "pAI",
     url: siteUrl,
   },
   isAccessibleForFree: true,

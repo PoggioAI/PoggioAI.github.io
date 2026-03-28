@@ -1,6 +1,6 @@
 # Configuration
 
-PoggioAI MSc stores configuration in `~/.msc/config.yaml`. You can manage it via the `msc config` CLI or by editing the file directly.
+pAI MSc stores configuration in `~/.msc/config.yaml`. You can manage it via the `msc config` CLI or by editing the file directly.
 
 ---
 
@@ -157,7 +157,7 @@ Set cluster paths via environment variables:
 
 - `CONDA_INIT_SCRIPT` — path to `conda.sh` init script
 - `CONDA_ENV_PREFIX` — conda environment path
-- `REPO_ROOT` — path to your PoggioAI MSc clone
+- `REPO_ROOT` — path to your pAI MSc clone
 - `SCRATCH_ROOT` — scratch storage path
 - `SLURM_OUTPUT_DIR` — where to write SLURM logs
 

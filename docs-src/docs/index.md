@@ -1,6 +1,6 @@
-# PoggioAI MSc
+# pAI MSc
 
-Welcome to the documentation for **PoggioAI MSc** (Multi-agent Scientific Collaboration) — an open-source research automation system that transforms a research question into a complete, submission-ready manuscript.
+Welcome to the documentation for **pAI MSc** (Multi-agent Scientific Collaboration) — an open-source research automation system that transforms a research question into a complete, submission-ready manuscript.
 
 [Back to main site](https://poggioai.github.io){ .md-button }
 [GitHub Repository](https://github.com/PoggioAI/PoggioAI_MSc/tree/MSc_Prod){ .md-button .md-button--primary }

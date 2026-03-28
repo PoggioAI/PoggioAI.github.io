@@ -43,7 +43,7 @@ export default async function BlogPage() {
               Blog & Updates
             </h1>
             <p className="text-lg text-muted-foreground leading-relaxed">
-              Research insights, project notes, and updates from PoggioAI.
+              Research insights, project notes, and updates from pAI.
             </p>
           </div>
 

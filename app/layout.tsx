@@ -4,7 +4,7 @@ import { GoogleAnalytics } from '@next/third-parties/google'
 import './globals.css'
 
 export const metadata: Metadata = {
-  title: 'PoggioAI | MIT',
+  title: 'pAI | MIT',
   description: 'A multi-agent AI system that turns research hypotheses into high-quality papers with minimal human steering.',
   icons: {
     icon: [

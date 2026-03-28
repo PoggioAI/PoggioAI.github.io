@@ -24,12 +24,12 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
 
   if (!post) {
     return {
-      title: "Post Not Found | PoggioAI",
+      title: "Post Not Found | pAI",
     }
   }
 
   return {
-    title: `${post.title} | PoggioAI`,
+    title: `${post.title} | pAI`,
     description: post.excerpt,
   }
 }

@@ -8,7 +8,7 @@ export function Footer() {
           <div className="sm:col-span-2 lg:col-span-1">
             <Link href="/" className="inline-block mb-4">
               <span className="text-lg font-semibold tracking-tight text-foreground">
-                PoggioAI
+                pAI
               </span>
             </Link>
             <p className="text-sm text-muted-foreground leading-relaxed">
@@ -74,7 +74,7 @@ export function Footer() {
 
         <div className="pt-8 border-t border-border flex flex-col sm:flex-row justify-between items-center gap-4">
           <p className="text-xs text-muted-foreground">
-            &copy; 2026 PoggioAI, MIT. All rights reserved.
+            &copy; 2026 pAI, MIT. All rights reserved.
           </p>
           <a
             href="https://accessibility.mit.edu"
