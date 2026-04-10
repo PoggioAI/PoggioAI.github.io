@@ -1,10 +1,16 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { SiteHeader } from "@/components/SiteHeader";
 import { themeTokens } from "@/lib/theme";
+import type { BlogPost } from "@/lib/blogs";
 
-export function Hero() {
+type HeroProps = {
+  latestPosts: BlogPost[];
+};
+
+export function Hero({ latestPosts }: HeroProps) {
   const token = themeTokens;
   const particleBaseColor = `rgb(${token.particleBase.map((v) => Math.round(v * 255)).join(", ")})`;
   const scrollRef = useRef<HTMLDivElement>(null);
@@ -156,6 +162,53 @@ export function Hero() {
             </div>
           </div>
         </section>
+
+        {latestPosts.length > 0 ? (
+          <section className="pointer-events-none page-gutter-x mt-10 pb-50 md:mt-14 md:pb-56">
+            <div className="mx-auto max-w-4xl">
+              <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+                <div>
+                  <h2 className="text-4xl font-semibold tracking-tight md:text-5xl">Latest blog posts</h2>
+                  <p className="mt-4 max-w-2xl text-base leading-relaxed md:text-lg" style={{ color: token.textSecondary }}>
+                    Recent notes, releases, and research updates from the team.
+                  </p>
+                </div>
+                <Link
+                  href="/blogsupdates"
+                  className="pointer-events-auto text-sm underline underline-offset-4 transition-opacity hover:opacity-80 md:text-base"
+                  style={{ color: token.textPrimary }}
+                >
+                  View all posts
+                </Link>
+              </div>
+
+              <div className="mt-8 grid gap-5 md:grid-cols-2">
+                {latestPosts.map((post) => (
+                  <Link
+                    key={post.slug}
+                    href={`/blogsupdates/${post.slug}`}
+                    className="pointer-events-auto rounded-3xl border border-white/20 bg-black/45 p-5 backdrop-blur-xl transition-all hover:border-white/30 hover:bg-black/55"
+                  >
+                    <article>
+                      <p className="text-xs uppercase tracking-[0.18em] md:text-[0.7rem]" style={{ color: token.textSecondary }}>
+                        {post.date}
+                      </p>
+                      <h3 className="mt-3 text-xl font-medium leading-snug md:text-2xl" style={{ color: token.textPrimary }}>
+                        {post.title}
+                      </h3>
+                      <p className="mt-3 text-sm leading-relaxed md:text-base" style={{ color: token.textSecondary }}>
+                        {post.excerpt}
+                      </p>
+                      <p className="mt-4 text-sm underline underline-offset-4 md:text-base" style={{ color: token.textPrimary }}>
+                        Read post
+                      </p>
+                    </article>
+                  </Link>
+                ))}
+              </div>
+            </div>
+          </section>
+        ) : null}
       </div>
 
       <footer
@@ -175,7 +228,7 @@ export function Hero() {
             </a>
           </p>
           <p className="mt-2 text-xs leading-snug md:text-3xs" style={{ color: particleBaseColor }}>
-            © 2026 pAI, MIT. Mahmoud Abdelmoneum, Pierfrancesco Beneventano, Tomaso Poggio.
+            © 2026 Mahmoud Abdelmoneum, Pierfrancesco Beneventano, Tomaso Poggio.
           </p>
         </div>
       </footer>

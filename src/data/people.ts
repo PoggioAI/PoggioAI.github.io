@@ -10,7 +10,7 @@ export const peopleData: Person[] = [
   {
     name: "Pierfrancesco Beneventano",
     //role: "CEO",
-    affiliation: "Massachusetts Institute of Technology",
+    affiliation: "MIT",
     image: "/people/pier-285x300.jpg",
     link: "https://pierbeneventano.github.io",
   },
@@ -24,7 +24,7 @@ export const peopleData: Person[] = [
   {
     name: "Tomaso Poggio",
     //role: "Chairman",
-    affiliation: "Massachusetts Institute of Technology",
+    affiliation: "MIT",
     image: "/people/poggio-240x300.jpg",
     link: "https://poggio-lab.mit.edu",
   },
@@ -33,20 +33,20 @@ export const peopleData: Person[] = [
   {
     name: "Mahmoud Abdelmoneum",
     //role: "Founding Researcher",
-    affiliation: "Massachusetts Institute of Technology & Perseus Labs",
+    affiliation: "MIT & Perseus Labs",
         image: "/people/mahmoud_a.jpg",
   },
   {
     name: "Riccardo Neumarker",
     //role: "Founding Researcher",
-    affiliation: "Massachusetts Institute of Technology",
+    affiliation: "MIT",
     image: "/people/riccardo_n.jpeg",
     link: "https://riccardoneumarker.com",
   },
   {
     name: "Emanuele Rimoldi",
     //role: "Founding Researcher",
-    affiliation: "Massachusetts Institute of Technology",
+    affiliation: "MIT",
     image: "/people/emanuele_r.jpg",
     link: "https://www.emanuelerimoldi.com/",
   },
