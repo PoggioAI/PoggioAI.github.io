@@ -9,6 +9,22 @@ export type Publication = {
 
 export const publications: Publication[] = [
   {
+    title: "Agentic Systems as Boosting Weak Reasoning Models",
+    authors: "Sunkaraneni, V.*, Beneventano, P.*, Neumarker, R., Poggio, T., Galanti, T.",
+    venue: "arXiv, May 2026",
+    year: "2026",
+    link: "https://arxiv.org/abs/2605.14163",
+    pdfLink: "https://arxiv.org/pdf/2605.14163",
+  },
+  {
+    title: "Distribution-Aware Algorithm Design with LLM Agents",
+    authors: "Koganti, S., Mishra, P., Beneventano, P., Galanti, T.",
+    venue: "arXiv, May 2026; revised June 2026",
+    year: "2026",
+    link: "https://arxiv.org/abs/2605.14141",
+    pdfLink: "https://arxiv.org/pdf/2605.14141",
+  },
+  {
     title: "Agent Systems for Academic Research Automation: An Evolving Survey",
     authors:
       "Beneventano, P.*, Neumarker, R.*, Abdelmoneum, M., Bacvanski, M., Gan, Y., Hajoub, M., Liao, Q., Rimoldi, E., Tiwary, K., Ziyin, L., Galanti, T., Evgeniou, T., Poggio, T.",
